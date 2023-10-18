@@ -1,0 +1,29 @@
+@import "./variables.scss";
+
+.header {
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1240px;
+  margin: auto;
+  &__logo {
+    max-width: 150px;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  &__nav {
+    ul {
+      display: flex;
+      list-style: none;
+      li {
+        margin: 0 10px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
