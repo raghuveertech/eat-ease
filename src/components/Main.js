@@ -13,6 +13,7 @@ const Main = () => {
     pureVeg: false,
   });
   const [apiCallComplete, setApiCallComplete] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const filtersHandle = (e, filterItem, isSet) => {
     e.stopPropagation();
@@ -23,22 +24,22 @@ const Main = () => {
   };
 
   const filterRestaurants = () => {
-    let filteredRestaurants = [...restaurants];
-    filteredRestaurants = filteredRestaurants.filter((item) => {
+    let allRestaurants = [...restaurants];
+    let allRestaurantsFiltered = allRestaurants.filter((item) => {
       if (filters.pureVeg === true && !item.info.veg) {
         return false;
       }
-      if (filters.topRated === true && item.info.avgRating <= 4.2) {
+      if (filters.topRated === true && item.info.avgRating <= 4.5) {
+        return false;
+      }
+      if (!item.info.name.toLowerCase().includes(searchQuery.toLowerCase())) {
         return false;
       }
       return true;
     });
-    setFilteredRestaurants(filteredRestaurants);
+    console.log("allRestaurantsFiltered", allRestaurantsFiltered);
+    setFilteredRestaurants(allRestaurantsFiltered);
   };
-
-  useEffect(() => {
-    filterRestaurants();
-  }, [filters]);
 
   const fetchRestaurants = async () => {
     try {
@@ -66,13 +67,42 @@ const Main = () => {
     }
   };
 
+  const searchQueryHandler = (e) => {
+    let searchTerm = e.target.value;
+    if (!searchTerm) {
+      searchTerm = "";
+    }
+    searchTerm = searchTerm.trim();
+    setSearchQuery(searchTerm);
+  };
+
+  const clearSearch = () => {
+    setSearchQuery("");
+  };
+
   useEffect(() => {
     fetchRestaurants();
   }, []);
 
+  useEffect(() => {
+    filterRestaurants();
+  }, [filters]);
+
+  useEffect(() => {
+    if (searchQuery === "") {
+      filterRestaurants();
+    }
+  }, [searchQuery]);
+
   return (
     <div className="main">
-      <Search />
+      <Search
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        searchQueryHandler={searchQueryHandler}
+        filterRestaurants={filterRestaurants}
+        clearSearch={clearSearch}
+      />
       <Filters filters={filters} filtersHandle={filtersHandle} />
       {!apiCallComplete && restaurants.length === 0 ? (
         <Shimmer />
