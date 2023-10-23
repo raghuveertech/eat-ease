@@ -7,6 +7,26 @@
   margin-bottom: 20px;
   cursor: pointer;
   position: relative;
+  &__veg-icon {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 25px;
+    height: 25px;
+    border: 3px solid $green;
+    background-color: $white;
+    &:before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: $green;
+      content: "";
+      transform: translate(-50%, -50%);
+    }
+  }
   &__tag {
     position: absolute;
     top: 10px;
@@ -16,11 +36,12 @@
     padding: 5px 25px;
     border-radius: 5px;
     display: block;
-    width: 150px;
+    width: 160px;
     z-index: 1;
     font-size: 15px;
   }
   &__image {
+    position: relative;
     height: auto;
     border-radius: 10px;
     overflow: hidden;
@@ -57,7 +78,11 @@
         }
       }
     }
-    &__cuisine,
+    &__cuisine {
+      color: rgba($black, 0.4);
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
     &__address {
       color: rgba($black, 0.6);
       font-size: 14px;

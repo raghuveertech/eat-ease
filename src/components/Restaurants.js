@@ -1,12 +1,14 @@
 import "./../scss/restaurants.scss";
 import RestaurantCard from "./RestaurantCard";
-import { restaurants } from "../utils/mockData";
 
-const Restaurants = () => {
+const Restaurants = (props) => {
+  const { restaurants } = props;
   return (
     <div className="restaurants">
       {restaurants.map((restaurant) => {
-        return <RestaurantCard key={restaurant.id} restaurant={restaurant} />;
+        return (
+          <RestaurantCard key={restaurant.info.id} restaurant={restaurant} />
+        );
       })}
     </div>
   );
