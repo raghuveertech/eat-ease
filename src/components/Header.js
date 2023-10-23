@@ -1,5 +1,5 @@
 import "./../scss/header.scss";
-import * as logo from "./../assets/images/eat-ease-logo.png";
+import * as logo from "./../../assets/images/eat-ease-logo.png";
 
 const Header = () => {
   return (

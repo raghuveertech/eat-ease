@@ -4,10 +4,13 @@ import "./../scss/restaurant-card.scss";
 
 const RestaurantCard = (props) => {
   const { restaurant } = props;
-  const { image, name, cuisine, rating, address } = restaurant;
+  const { image, name, cuisine, rating, address, freeDelivery } = restaurant;
   return (
     <div className="restautant-card">
       <div className="restautant-card__image">
+        {freeDelivery ? (
+          <span className="restautant-card__tag">Free Delivery</span>
+        ) : null}
         <img src={image} alt={name} />
       </div>
       <div className="restautant-card__content">
